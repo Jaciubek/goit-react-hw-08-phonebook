@@ -1,0 +1,9 @@
+.sectionHead {
+  font-size: 25px;
+  letter-spacing: 0.05em;
+}
+@media screen and (min-width: 768px) {
+  .sectionHead {
+    font-size: 50px;
+  }
+}

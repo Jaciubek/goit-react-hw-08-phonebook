@@ -1,0 +1,50 @@
+.loginForm {
+  display: flex;
+  flex-direction: column;
+}
+.label {
+  margin-bottom: 5px;
+}
+.input {
+  border-radius: 8px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  padding: 8px 10px;
+  border: solid 1px #3735379b;
+  outline: transparent;
+  transition: all 0.25s;
+  background-color: blanchedalmond;
+}
+.input:focus {
+  border: solid 2px red;
+  background-color: white;
+}
+
+.btn {
+  margin-top: 10px;
+  width: 100%;
+  padding: 8px;
+  background-color: black;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: color 250ms;
+}
+
+.btn:hover,
+.btn:focus {
+  color: red;
+  font-size: 16px ;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+@media screen and (min-width: 768px) {
+  .btn,
+  .input {
+    font-size: 16px;
+  }
+}
