@@ -17,7 +17,7 @@ const Filter = () => {
   return (
     <div className={filterField}>
       <p className={filterText}>Find contact by name</p>
-      <input className={filterInput} type="text" onChange={filterValue} />
+      <input className={filterInput} type="text" onChange={filterValue} placeholder="Enter name..." />
     </div>
   );
 };
