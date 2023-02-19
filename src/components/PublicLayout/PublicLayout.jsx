@@ -1,14 +1,31 @@
 import styles from './PublicLayout.module.css';
 import myPhoto from './avatar.jpg';
 import { IoLogoLinkedin, IoLogoGithub } from 'react-icons/io';
+import { useDispatch } from 'react-redux';
+import { logIn } from '../../redux/auth/authOperations';
+import { useAuth } from 'hooks';
 
 const PublicLayout = () => {
-  const { heading, description, presentation, photo, linkedin, github, info } =
+  const { heading, description, presentation, photo, linkedin, github, info, demo } =
     styles;
+  
+  const dispatch = useDispatch();
+  const { isLoggedIn, user } = useAuth();
+  const logInDemoUser = () => {
+   dispatch(
+      logIn({
+        email: "demo@user.com",
+        password: "Demo12345",
+      })
+    );
+}
 
   const content = (
     <section className="public">
-      <h1 className={heading}>Hi it is Phonebook App</h1>
+      <h1 className={heading}>
+        Hi <span>{isLoggedIn ? `${String(user.name)} ` : ''}</span>
+        it is my Phonebook App
+      </h1>
       <p className={description}>
         This application was created during the GoIT programming course "Full Stack Developer od zera". Please
         register for start.
@@ -22,6 +39,15 @@ const PublicLayout = () => {
           Application code
         </a>
       </p>
+
+      {!isLoggedIn && (
+        <button
+          className={demo}
+          onClick={() => logInDemoUser()}
+        >
+          Login as demo user
+        </button>
+      )}
 
       <div className={presentation}>
         <div>

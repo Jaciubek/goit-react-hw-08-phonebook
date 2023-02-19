@@ -16,9 +16,7 @@ const Register = () => {
 
     const form = e.target;
     const { name, email, password } = form.elements;
-    console.log(name.value);
-    console.log(email.value);
-    console.log(password.value);
+    
     dispatch(
       register({
         name: name.value,

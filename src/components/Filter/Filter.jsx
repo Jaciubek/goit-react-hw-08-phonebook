@@ -1,8 +1,7 @@
 import styles from './Filter.module.css';
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { setFilter } from 'redux/slices/filterSlice';
-
+import { filterContacts } from 'redux/contacts/contactsSlice';
 
 const Filter = () => {
   const { filterField, filterText, filterInput } = styles;
@@ -11,13 +10,13 @@ const Filter = () => {
 
   const filterValue = e => {
     const value = e.target.value.toLowerCase();
-    dispatch(setFilter(value));
+    dispatch(filterContacts(value));
   };
 
   return (
     <div className={filterField}>
       <p className={filterText}>Find contact by name</p>
-      <input className={filterInput} type="text" onChange={filterValue} placeholder="Enter name..." />
+      <input className={filterInput} type="text" onChange={filterValue} />
     </div>
   );
 };

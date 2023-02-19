@@ -21,14 +21,13 @@ export const register = createAsyncThunk(
   'auth/register',
   async (credentials, thunkAPI) => {
     try {
-    
-      const { data } = await axios.post('/users/signup', credentials);
-      console.log(data);
+      const response = await axios.post('/users/signup', credentials);
+      const data = response.data;
       // After successful register, add the token to the HTTP header
       setAuthHeader(data.token);
       return data;
     } catch (error) {
-      console.log(error);
+      alert('User with this email address already exists! You can login or try with another email.');
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -42,11 +41,13 @@ export const logIn = createAsyncThunk(
   'auth/login',
   async (credentials, thunkAPI) => {
     try {
-      const { data } = await axios.post('/users/login', credentials);
+      const response = await axios.post('/users/login', credentials);
+      const data = response.data;
       // After successful login, add the token to the HTTP header
       setAuthHeader(data.token);
       return data;
     } catch (error) {
+      alert('Your email or password does not match. Try again');
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -85,7 +86,7 @@ export const refreshUser = createAsyncThunk(
     try {
       // If there is a token, add it to the HTTP header and perform the request
       setAuthHeader(persistedToken);
-      const { data } = await axios.get('/users/me');
+      const { data } = await axios.get('/users/current');
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

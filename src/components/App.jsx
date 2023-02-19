@@ -5,14 +5,15 @@ import Layout from './Layout/Layout';
 import { PrivateRoute } from './PrivateRoute';
 import { RestrictedRoute } from './RestrictedRoute';
 import { refreshUser } from 'redux/auth/authOperations';
-import { useAuth } from 'hooks/useAuth';
+import { useAuth } from 'hooks';
+import Loader from './Loader/Loader';
 
 const PublicLayout = lazy(() =>
   import('../components/PublicLayout/PublicLayout')
 );
 const Register = lazy(() => import('../components/Register/Register'));
 const Login = lazy(() => import('../components/Login/Login'));
-const ContactsPage = lazy(() => import('pages/ContactsPage/ContactsPage'));
+const ContactsPage = lazy(() => import('../pages/ContactsPage/ContactsPage'));
 
 function App() {
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ function App() {
   }, [dispatch]);
 
   return isRefreshing ? (
-    <b>Refreshing user...</b>
+    <Loader />
   ) : (
     <Routes>
       <Route path="/" element={<Layout />}>

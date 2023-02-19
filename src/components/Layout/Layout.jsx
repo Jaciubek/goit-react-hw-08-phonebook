@@ -1,6 +1,8 @@
 import { Outlet, NavLink, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { useAuth } from '../../hooks/useAuth';
+import { IconContext } from 'react-icons';
+import { IoIosLogOut } from 'react-icons/io';
+import { useAuth } from 'hooks';
 import { logOut } from 'redux/auth/authOperations';
 import { Suspense } from 'react';
 import styled from 'styled-components';
@@ -12,7 +14,7 @@ const StyledLink = styled(NavLink)`
   text-decoration: none;
   font-weight: 600;
   margin-left: 15px;
-  line-height: 1.5;
+  line-height: 1.25;
   &::after {
     position: absolute;
     left: 0;
@@ -32,9 +34,9 @@ const StyledLink = styled(NavLink)`
 `;
 
 const Layout = () => {
-  const { layout__wrapper, layout__header, layout__nav, layout__link, layout__links, layout__main } = styles;
+  const { layout__wrapper, layout__header, layout__nav, layout__link, layout__links, layout__main, layout__btn } = styles;
 
-  const { isLoggedIn, user } = useAuth();
+  const { isLoggedIn } = useAuth();
   const dispatch = useDispatch();
 
   return (
@@ -43,15 +45,21 @@ const Layout = () => {
         <header className={layout__header}>
           <nav className={layout__nav}>
             <Link className={layout__link} to="/">
-              Phonebook
+              Home
             </Link>
+            {isLoggedIn && <StyledLink to="/contacts">Contacts</StyledLink>}
             {isLoggedIn ? (
-              <div className={layout__links}>
-                <p>{ `Welcome ${user.name}`}</p>
-                <button type="button" onClick={() => dispatch(logOut())}>
-                  Logout
-                </button>
-              </div>
+              <IconContext.Provider value={{ size: '25px' }}>
+                <div className={layout__links}>
+                  <button
+                    className={layout__btn}
+                    type="button"
+                    onClick={() => dispatch(logOut())}
+                  >
+                    <IoIosLogOut />
+                  </button>
+                </div>
+              </IconContext.Provider>
             ) : (
               <div className={layout__links}>
                 <StyledLink to="/login">Log in</StyledLink>
