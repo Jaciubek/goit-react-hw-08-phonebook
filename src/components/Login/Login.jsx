@@ -36,6 +36,7 @@ console.log( error);
           id="email"
           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
           autoComplete="email"
+          placeholder='Enter your e-mail...'
         />
 
         <label className={label} htmlFor="password">
@@ -49,6 +50,7 @@ console.log( error);
           title="Must contain at least one uppercase and lowercase letter, one number and at least 8 or more characters"
           name="password"
           autoComplete="password"
+          placeholder='Enter your password'
         />
         <button className={btn} type="submit">
           Log In
